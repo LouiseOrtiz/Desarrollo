@@ -25,21 +25,15 @@ class ControladorProductos{
 
 		if(isset($_POST["nuevaDescripcion"])){
 
-			if(	preg_match('/^[ a-zA-Z0-9]+$/', $_POST["nuevoCodigoSAT"]) &&
-				preg_match('/^[ a-zA-Z]+$/', $_POST["nuevaUnidad"]) &&
-				preg_match('/^[ a-zA-Z0-9]+$/', $_POST["nuevaUnidadSat"]) &&
-				preg_match('/^[ a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevaMarca"]) &&
-			   	preg_match('/^[0-9]+$/', $_POST["nuevoStock"]) &&	
+			if(	preg_match('/^[0-9]+$/', $_POST["nuevoStock"]) &&	
 				preg_match('/^[0-9.]+$/', $_POST["nuevoPrecioCompra"]) &&
 				preg_match('/^[0-9.]+$/', $_POST["nuevoPrecioVenta"])){
 
-				//preg_match('/^[ a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\/\-]+$/', $_POST["nuevaDescripcion"]) &&
-
-		   		/*============================================= 
+				/*============================================= 
 				VALIDAR IMAGEN
 				=============================================*/
 
-			   	$ruta = "vistas/img/productos/default/anonymous.png";
+			   	$ruta = "vistas/img/productos/default/anonymous.png"; 
 
 			   	if(isset($_FILES["nuevaImagen"]["tmp_name"])){
 
@@ -100,7 +94,7 @@ class ControladorProductos{
 
 					}
 
-				}
+				} 
 
 				$tabla = "productos";
 
@@ -137,26 +131,7 @@ class ControladorProductos{
 
 						</script>';
 
-				} else{
-
-					echo'<script>
-
-						swal({
-							  type: "error",
-							  title: "¡El producto no puede ir con los campos vacíos o llevar caracteres especiales!",
-							  showConfirmButton: true,
-							  confirmButtonText: "Cerrar"
-							  }).then(function(result){
-								if (result.value) {
-
-								window.location = "productos";
-
-								}
-							})
-
-				  	</script>';
 				}
-
 
 			}else{
 
@@ -175,10 +150,9 @@ class ControladorProductos{
 							}
 						}) 
 
-			  	</script>';
+			  	</script>'; 
 			}
 		}
-
 	}
 
 	/*=============================================
@@ -189,12 +163,7 @@ class ControladorProductos{
 
 		if(isset($_POST["editarDescripcion"])){
 
-			if(preg_match('/^[a-z\/\A-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarCodigoSAT"]) && 
-				preg_match('/^[ a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.()° ]+$/', $_POST["editarDescripcion"]) &&
-				preg_match('/^[ a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarUnidad"]) &&
-				preg_match('/^[ a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarUnidadSat"]) &&
-				preg_match('/^[ a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarMarca"]) &&
-			   preg_match('/^[0-9]+$/', $_POST["editarStock"]) &&	
+			if(preg_match('/^[0-9]+$/', $_POST["editarStock"]) &&	
 			   preg_match('/^[0-9.]+$/', $_POST["editarPrecioCompra"]) &&
 			   preg_match('/^[0-9.]+$/', $_POST["editarPrecioVenta"])){
 

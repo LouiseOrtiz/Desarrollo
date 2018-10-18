@@ -104,7 +104,7 @@ $("#nuevoPrecioCompra, #editarPrecioCompra").change(function(){
 		$("#nuevoPrecioVenta").prop("readonly",true);
 
 		$("#editarPrecioVenta").val(editarPorcentaje);
-		$("#editarPrecioVenta").prop("readonly",true);
+		$("#editarPrecioVenta").prop("readonly",true); 
 
 	}
 
@@ -312,35 +312,29 @@ $("#nuevaUnidad").change(function(){
 
  var nuevaClave = $(this).val();
 
-if (nuevaClave == "KILOGRAMO") {
+if (nuevaClave == "KILOGRAMO"){
 
   $("#nuevaUnidadSat").val("KGM");
-  $("#editarUnidadSat").val("KGM");
-
+  
  }else if (nuevaClave == "KIT") {
 
   $("#nuevaUnidadSat").val("KT");
-  $("#editarUnidadSat").val("KT");
-
+ 
  }else if (nuevaClave == "LITRO") {
 
   $("#nuevaUnidadSat").val("LTR");
-  $("#editarUnidadSat").val("LTR");
-
+  
  }else if (nuevaClave == "METRO") {
 
   $("#nuevaUnidadSat").val("MTR");
-  $("#editarUnidadSat").val("MTR");
-
+  
  }else if (nuevaClave == "PIEZA") {
 
-  $("#nuevaUnidadSat").val("H87");
-  $("#editarUnidadSat").val("H87");
+  $("#nuevaUnidadSat").val("H87"); 
 
  }else{
 
   $("#nuevaUnidadSat").val(null);
-  $("#editarUnidadSat").val(null);
 
  }
 
@@ -350,7 +344,7 @@ if (nuevaClave == "KILOGRAMO") {
 EDITAR UNIDAD SAT 
 =============================================*/
 
-/*$("#editarUnidad").change(function(){
+$("#editarUnidad").change(function(){
 
  var editarClave = $(this).val();
 
@@ -380,5 +374,50 @@ if (editarClave == "KILOGRAMO") {
 
  }
 
-})*/
+})
 	
+/*=============================================
+REVISAR SI EL USUARIO YA ESTÁ REGISTRADO
+=============================================*/
+
+$("#nuevoCodigo").change(function(){
+
+  //$(".alert").remove();
+
+  var codigo = $(this).val();
+
+  var datos = new FormData();
+  datos.append("validarProducto", codigo);
+
+   $.ajax({
+      url:"ajax/productos.ajax.php",
+      method:"POST",
+      data: datos,
+      cache: false,
+      contentType: false,
+      processData: false,
+      dataType: "json",
+      success:function(respuesta){
+        
+        if(respuesta){
+
+          $("#nuevoCodigo").parent();
+
+           swal({
+            title: 'El código que desea desea ingresar "'+ codigo +'"',
+            text: "Ya se encuentra en uso",
+            type: 'warning',
+            confirmButtonText: "¡Cerrar!"
+          })
+
+          //$("#nuevoUsuario").parent().after('<div class="alert alert-warning">Este usuario ya existe en la base de datos</div>');
+
+          $("#nuevoCodigo").val("");
+
+
+        }
+
+      }
+
+  })
+})
